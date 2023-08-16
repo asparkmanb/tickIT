@@ -1,6 +1,8 @@
 package com.example.tickit.Controllers;
 
+import com.example.tickit.DAO.OrganizationDAO;
 import com.example.tickit.Main;
+import com.example.tickit.Models.Organization;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Register1Controller {
 
@@ -33,6 +36,8 @@ public class Register1Controller {
     @FXML
     private Button nextButton;
 
+    private Parent root;
+
     @FXML
     void back(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("login.fxml"));
@@ -48,15 +53,26 @@ public class Register1Controller {
     }
 
     @FXML
-    void next(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("register_2.fxml"));
+    void next(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+
+
+        String newOrgName = nameInput.getText();
+        String newOrgLocation = addressInput.getText();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("register_2.fxml"));
+        loader.load();
         Stage stage;
-        Scene scene;
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 731, 452);
+
+        Register2Controller register2Controller = loader.getController();
+        register2Controller.recieveOrganization(newOrgName, newOrgLocation);
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        Parent scene = loader.getRoot();
+        stage.setScene(new Scene(scene, 731, 452));
         stage.setTitle("Register");
-        stage.setScene(scene);
         stage.show();
+
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((screenBounds.getWidth()-stage.getWidth()) / 2);
 

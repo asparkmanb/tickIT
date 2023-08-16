@@ -24,7 +24,7 @@ public class JDBC {
     public static Connection connection;
     public static Connection con;
 
-    public static void openConnection() throws IOException, ClassNotFoundException, SQLException {
+    public static Connection openConnection() throws IOException, ClassNotFoundException, SQLException {
 
         FileInputStream fis = new FileInputStream("properties/db_connection.properties");
         Properties properties = new Properties();
@@ -38,6 +38,7 @@ public class JDBC {
         Class.forName(driver); // Locate Driver
         connection = DriverManager.getConnection(url, username, password); // Reference Connection object
         System.out.println("connection opened");
+        return connection;
     }
 
     public static void closeConnection() {

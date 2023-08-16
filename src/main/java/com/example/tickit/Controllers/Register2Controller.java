@@ -42,6 +42,16 @@ public class Register2Controller {
     @FXML
     private TextField usernameInput;
 
+    private String newOrgName;
+    private String newOrgLocation;
+
+    public void recieveOrganization(String orgName,String orgLocation){
+        newOrgName = orgName;
+        newOrgLocation = orgLocation;
+        System.out.println(orgName);
+        System.out.println(orgLocation);
+    }
+
     @FXML
     void back(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("register_1.fxml"));

@@ -1,5 +1,7 @@
 package com.example.tickit;
 
+import com.example.tickit.DAO.AdminDAO;
+import com.example.tickit.Models.Admin;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -27,9 +29,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
-        JDBC.openConnection();
         launch();
-        JDBC.closeConnection();
     }
 
 }
