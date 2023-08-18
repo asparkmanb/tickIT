@@ -6,6 +6,7 @@ import com.example.tickit.Models.Organization;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -17,9 +18,11 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class Register1Controller {
+public class Register1Controller implements Initializable {
 
     @FXML
     private TextField addressInput;
@@ -37,6 +40,7 @@ public class Register1Controller {
     private Button nextButton;
 
     private Parent root;
+
 
     @FXML
     void back(ActionEvent event) throws IOException {
@@ -75,7 +79,12 @@ public class Register1Controller {
 
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((screenBounds.getWidth()-stage.getWidth()) / 2);
-
+        stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    }
 }

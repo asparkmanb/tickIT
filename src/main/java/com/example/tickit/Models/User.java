@@ -1,7 +1,7 @@
 package com.example.tickit.Models;
 
-public class Admin {
-    public Admin(int id, String username, String password, String firstName, String lastName, String emailAddress, int orgID, int superAdmin) {
+public class User {
+    public User(int id, String username, String password, String firstName, String lastName, String emailAddress, int orgID, int superAdmin, int admin) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -10,6 +10,7 @@ public class Admin {
         this.emailAddress = emailAddress;
         this.orgID = orgID;
         this.superAdmin = superAdmin;
+        this.admin = admin;
     }
 
     private int id;
@@ -19,6 +20,16 @@ public class Admin {
     private String lastName;
     private String emailAddress;
     private int orgID;
+
+    public int getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(int admin) {
+        this.admin = admin;
+    }
+
+    private int admin;
 
     public int getId() {
         return id;
