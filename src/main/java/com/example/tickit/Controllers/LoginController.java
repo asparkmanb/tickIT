@@ -1,6 +1,8 @@
 package com.example.tickit.Controllers;
 
+import com.example.tickit.DAO.UserDAO;
 import com.example.tickit.Main;
+import com.example.tickit.Models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController {
 
@@ -39,7 +42,31 @@ public class LoginController {
     private TextField usernameField;
 
     @FXML
-    void Login(ActionEvent event) throws IOException {
+    void Login(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+
+        boolean userNameValid = false;
+        boolean passwordValid = false;
+
+
+        String userName = usernameField.getText();
+        String password = passwordField.getText();
+
+        for(User user : UserDAO.getAllUsers()){
+            if (user.getUsername().equals(userName)){
+                userNameValid = true;
+                if(user.getPassword().equals(password)){
+                    passwordValid = true;
+                }
+            };
+        }
+
+        if(userNameValid & passwordValid){
+            System.out.println("login successful");
+        }
+        else{
+            System.out.println("login not successful");
+        }
+
 
 
     }
