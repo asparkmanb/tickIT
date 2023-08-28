@@ -45,6 +45,11 @@
                   <Button fx:id="loginButton" mnemonicParsing="false" onAction="#Login" prefWidth="135.0" text="Login" />
                </children>
             </HBox>
+            <Label fx:id="invalidLabel" text="Username or password is incorrect" textFill="#ee2828" visible="false">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
             <Label fx:id="error" opacity="0.0" styleClass="error" text="Error" />
          </children>
       </VBox>

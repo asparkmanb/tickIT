@@ -15,16 +15,16 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
+
 public class LoginController {
+    @FXML
+    private Label invalidLabel;
 
     @FXML
     private Label error;
@@ -41,6 +41,8 @@ public class LoginController {
     @FXML
     private TextField usernameField;
 
+    private User loggedInUser;
+
     @FXML
     void Login(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
 
@@ -56,18 +58,41 @@ public class LoginController {
                 userNameValid = true;
                 if(user.getPassword().equals(password)){
                     passwordValid = true;
+                    if(userNameValid & passwordValid){
+                        loggedInUser = user;
+                        System.out.println(loggedInUser.getFirstName());
+                    }
                 }
             };
         }
 
         if(userNameValid & passwordValid){
             System.out.println("login successful");
+            invalidLabel.setVisible(false);
+
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("dashboard.fxml"));
+            loader.load();
+            Stage stage;
+
+            DashboardController dashboardController = loader.getController();
+            dashboardController.receiveUser(loggedInUser);
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene, 1070, 612));
+            stage.setTitle("Dashboard");
+            stage.show();
+
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((screenBounds.getWidth()-stage.getWidth()) / 2);
+            stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
         }
         else{
             System.out.println("login not successful");
+            invalidLabel.setVisible(true);
         }
-
-
 
     }
 

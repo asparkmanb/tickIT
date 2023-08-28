@@ -41,6 +41,14 @@
     -fx-font-size: 1.2em;
 }
 
+.dashboard_pane{
+    -fx-border-radius: 10px;
+    -fx-background-color: #219ebc;
+    -fx-background-radius: 10px;
+    -fx-alignment: center;
+
+}
+
 .login_form_container Button:hover {
     -fx-cursor: hand;
 }
@@ -53,4 +61,17 @@
     -fx-pref-width: 3;
 
 }
+
+
+.dashboard_container{
+    -fx-background-color: #f1faee;
+   -fx-border-width: 2px 2px 2px 2px;
+   -fx-border-radius: 20px;
+   -fx-background-radius: 20px;
+   -fx-border-style: solid;
+   -fx-border-color: #f1faee;
+
+}
+
+
 
