@@ -81,8 +81,8 @@ public class LoginController {
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             Parent scene = loader.getRoot();
-            stage.setScene(new Scene(scene, 1070, 612));
-            stage.setTitle("Dashboard");
+            stage.setScene(new Scene(scene, 1197, 730));
+            stage.setTitle("tickIT Solutions");
             stage.show();
 
             Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();

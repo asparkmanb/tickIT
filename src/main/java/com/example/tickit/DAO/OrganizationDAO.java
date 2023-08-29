@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrganizationDAO {
+public interface OrganizationDAO {
 
     public static void insert(Organization organization) throws SQLException, IOException, ClassNotFoundException {
         String sql = "INSERT INTO organizations(organization_id, name, location) VALUES (?,?,?)";
