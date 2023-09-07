@@ -2,7 +2,7 @@ package com.example.tickit.Models;
 
 public class Ticket {
 
-    public Ticket(int ticketID, String user, String priority, String email, String title, String location, String category, String description, int organizationID, String assignedTo, String status) {
+    public Ticket(int ticketID, int user, String email, String priority, String title, String location, String category, String description, int organizationID, int assignedTo, String status) {
         this.ticketID = ticketID;
         this.user = user;
         this.priority = priority;
@@ -17,7 +17,7 @@ public class Ticket {
     }
 
     private int ticketID;
-    private String user;
+    private int user;
     private String priority;
     private String email;
     private String title;
@@ -25,7 +25,7 @@ public class Ticket {
     private String category;
     private String description;
     private int organizationID;
-    private String assignedTo;
+    private int assignedTo;
     private String status;
 
     public int getTicketID() {
@@ -36,11 +36,11 @@ public class Ticket {
         this.ticketID = ticketID;
     }
 
-    public String getUser() {
+    public int getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(int user) {
         this.user = user;
     }
 
@@ -100,11 +100,11 @@ public class Ticket {
         this.organizationID = organizationID;
     }
 
-    public String getAssignedTo() {
+    public int getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(String assignedTo) {
+    public void setAssignedTo(int assignedTo) {
         this.assignedTo = assignedTo;
     }
 

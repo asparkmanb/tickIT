@@ -7,5 +7,8 @@ module com.example.tickit {
     opens com.example.tickit to javafx.fxml;
     exports com.example.tickit;
     exports com.example.tickit.Controllers;
+    exports com.example.tickit.Models;
     opens com.example.tickit.Controllers to javafx.fxml;
+    opens com.example.tickit.Models to java.base;
+
 }

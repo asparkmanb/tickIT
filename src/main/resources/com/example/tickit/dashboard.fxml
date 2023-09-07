@@ -60,7 +60,7 @@
             </Button>
          </children>
       </VBox>
-      <AnchorPane fx:id="dashboardAnchor" layoutX="255.0" layoutY="7.0" prefHeight="657.0" prefWidth="934.0" visible="false">
+      <AnchorPane fx:id="dashboardAnchor" layoutX="255.0" layoutY="7.0" prefHeight="657.0" prefWidth="934.0">
          <children>
             <HBox alignment="CENTER" layoutX="-9.0" layoutY="25.0" prefHeight="80.0" prefWidth="938.0" spacing="75.0">
                <children>
@@ -141,10 +141,16 @@
                   </Pane>
                </children>
             </HBox>
-            <TableView layoutX="13.0" layoutY="205.0" prefHeight="429.0" prefWidth="909.0">
+            <TableView fx:id="trTableView" editable="true" fixedCellSize="1.0" layoutX="13.0" layoutY="205.0" prefHeight="429.0" prefWidth="909.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="idCol" prefWidth="66.5" text="ID" />
+                  <TableColumn fx:id="statusCol" prefWidth="88.0" text="Status" />
+                <TableColumn fx:id="priorityCol" prefWidth="94.5" text="Priority" />
+                  <TableColumn fx:id="categoryCol" prefWidth="116.5" text="Category" />
+                  <TableColumn fx:id="titleCol" prefWidth="98.0" text="Title" />
+                  <TableColumn fx:id="locationCol" prefWidth="104.5" text="Location" />
+                  <TableColumn fx:id="descriptionCol" prefWidth="195.0" text="Description" />
+                  <TableColumn fx:id="assignedCol" minWidth="0.0" prefWidth="126.0" text="Assigned To" />
               </columns>
             </TableView>
             <TextField fx:id="searchBar" layoutX="640.0" layoutY="143.0" prefHeight="26.0" prefWidth="176.0" />
@@ -182,7 +188,7 @@
                </padding>
             </HBox>
          </children></AnchorPane>
-      <AnchorPane fx:id="submitTicketAnchorPane" layoutX="248.0" layoutY="7.0" prefHeight="716.0" prefWidth="940.0">
+      <AnchorPane fx:id="submitTicketAnchorPane" layoutX="248.0" layoutY="7.0" prefHeight="716.0" prefWidth="940.0" visible="false">
          <children>
             <VBox layoutX="24.0" layoutY="21.0" prefHeight="699.0" prefWidth="898.0" spacing="10.0">
                <children>
@@ -230,7 +236,7 @@
                      </font></TextField>
                   <HBox alignment="CENTER" prefHeight="52.0" prefWidth="898.0" spacing="150.0">
                      <children>
-                        <Button fx:id="submitTicket" mnemonicParsing="false" onAction="#onActionSubmitTicket" prefHeight="47.0" prefWidth="69.0" styleClass="button-hover" text="Submit" />
+                        <Button fx:id="submitTicketNew" mnemonicParsing="false" onAction="#onActionSubmitTicket" prefHeight="47.0" prefWidth="69.0" styleClass="button-hover" text="Submit" />
                         <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="47.0" prefWidth="69.0" styleClass="button-hover" text="Cancel" />
                      </children>
                   </HBox>

@@ -5,10 +5,13 @@ import com.example.tickit.DAO.UserDAO;
 import com.example.tickit.Models.Ticket;
 import com.example.tickit.Models.User;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -102,22 +105,41 @@ public class DashboardController implements Initializable {
     private Button cancelButton;
     @FXML
     private Button submitTicketNew;
+    @FXML
+    private TableColumn<Ticket, String> assignedCol;
+    @FXML
+    private TableColumn<Ticket, String> categoryCol;
+    @FXML
+    private TableColumn<Ticket, String > descriptionCol;
+    @FXML
+    private TableColumn<Ticket, Integer> idCol;
+    @FXML
+    private TableColumn<Ticket, String> locationCol;
+    @FXML
+    private TableColumn<Ticket, String> priorityCol;
+    @FXML
+    private TableColumn<Ticket, String> statusCol;
+    @FXML
+    private TableColumn<Ticket, String> titleCol;
+    @FXML
+    private TableView<Ticket> trTableView;
+
+    ObservableList<Ticket> usersTickets = FXCollections.observableArrayList();
 
     @FXML
     void onActionSubmitTicket(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
 
         int tickitID = 0;
-        String user = currentUser.getUsername();
-        String email = currentUser.getEmailAddress();
-        //String userFirstName = currentUser.getFirstName();
+        int user = currentUser.getId();
         String priority = "";
         String title = titleTextField.getText();
         String location = locationTextField.getText();
         String category = "";
         String description = descriptionTextField.getText();
         int organization_id = currentUser.getOrgID();
-        String assigned_to = "";
-        String status = "";
+        int assigned_to = 16;
+        String status = "New";
+        String email = currentUser.getEmailAddress();
 
         Ticket ticket = new Ticket(tickitID, user, email, priority, title, location, category, description, organization_id, assigned_to, status);
         TicketDAO.insert(ticket);
@@ -125,10 +147,6 @@ public class DashboardController implements Initializable {
         alert.setTitle("Thank you for submitting your ticket");
         alert.setContentText("A technician will reach out to you regarding this ticket shortly");
         alert.showAndWait();
-
-
-
-
     }
 
     @FXML
@@ -157,8 +175,11 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    void gotoDashboard(ActionEvent event) {
+    void gotoDashboard(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        trTableView.setItems(TicketDAO.getAllTickets());
 
+        dashboardAnchor.setVisible(true);
+        submitTicketAnchorPane.setVisible(false);
     }
 
     @FXML
@@ -186,8 +207,8 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    void onActionModify(ActionEvent event) {
-
+    void onActionModify(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        getUserTickets();
     }
 
     @FXML
@@ -214,10 +235,45 @@ public class DashboardController implements Initializable {
         System.out.println(user.getFirstName());
     }
 
+
+    public void getUserTickets() throws SQLException, IOException, ClassNotFoundException {
+        int userID = currentUser.getId();
+        usersTickets.setAll(TicketDAO.getAllTicketsofUser(userID));
+        trTableView.setItems(usersTickets);
+        System.out.println(userID);
+        System.out.println(usersTickets);
+
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+
+
+        idCol.setCellValueFactory(new PropertyValueFactory<Ticket, Integer>("ticketID"));
+        // statusCol.setCellValueFactory(new PropertyValueFactory<Ticket, String>("status"));
+       // priorityCol.setCellValueFactory(new PropertyValueFactory<Ticket, String>("priority"));
+       // categoryCol.setCellValueFactory(new PropertyValueFactory<Ticket, String>("category"));
+       // titleCol.setCellValueFactory(new PropertyValueFactory<Ticket, String>("title"));
+       // locationCol.setCellValueFactory(new PropertyValueFactory<Ticket, String >("location"));
+       // descriptionCol.setCellValueFactory(new PropertyValueFactory<Ticket, String>("description"));
+       // assignedCol.setCellValueFactory(new PropertyValueFactory<Ticket, String >("assignedTo"));
+
+
+        try {
+            trTableView.setItems(TicketDAO.getAllTickets());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         dashboardAnchor.setVisible(true);
         submitTicketAnchorPane.setVisible(false);
+
+
     }
 }
